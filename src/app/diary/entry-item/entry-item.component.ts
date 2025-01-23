@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ExerciseSet } from '../interfaces/exercise-set';
 
 @Component({
   selector: 'app-entry-item',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './entry-item.component.css'
 })
 export class EntryItemComponent {
-
-}
+  @Input('exercise-set') exerciseSet!: ExerciseSet;
+ }

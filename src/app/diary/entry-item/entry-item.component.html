@@ -1,6 +1,6 @@
 <div class="mb-4 border-b bg-white p-4">
-  <span class="font-bold">Date:</span> 12/12/2024 <br />
-  <span class="font-bold">Exercise:</span> Bench press <br />
-  <span class="font-bold">Sets:</span> 3 <br />
-  <span class="font-bold">Reps:</span> 10 <br />
+  <span class="font-bold">Date:</span> {{ exerciseSet.date | date }} <br />
+  <span class="font-bold">Exercise:</span> {{ exerciseSet.exercise }} <br />
+  <span class="font-bold">Sets:</span> {{ exerciseSet.sets }} <br />
+  <span class="font-bold">Reps:</span> {{ exerciseSet.reps }} <br />
 </div>

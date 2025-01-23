@@ -5,20 +5,10 @@
     </div>
   </header>
   <main class="mx-auto mt-8 max-w-6xl px-4">
-    <section class="mb-8">
-      <h2 class="mb-4 text-xl font-bold">List of entries</h2>
-      <ul class="rounded border shadow">
-        <li>
-            <app-entry-item />
-        </li>
-        <li>
-            <app-entry-item />
-        </li>
-        <!-- more entries here -->
-      </ul>
-    </section>
+    <app-list-entries [exerciseList]="exerciseList"/>
     <button
       class="rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+      (click)="newList()"
     >
       Add new entry
     </button>
