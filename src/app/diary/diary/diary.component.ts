@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ExerciseSet, ExerciseSetList } from '../interfaces/exercise-set';
 
 @Component({
-  selector: 'app-diary',
   templateUrl: './diary.component.html',
   styleUrl: './diary.component.css',
 })
