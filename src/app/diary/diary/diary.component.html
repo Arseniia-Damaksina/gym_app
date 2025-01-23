@@ -5,16 +5,19 @@
     </div>
   </header>
   <main class="mx-auto mt-8 max-w-6xl px-4">
-    <app-list-entries [exerciseList]="exerciseList"/>
-    <app-new-item-button (newExerciseEvent)="addExercise($event)"/>
+    <app-list-entries
+      [exerciseList]="exerciseList"
+      (deleteEvent)="deleteItem($event)"
+      (newRepEvent)="newRep($event)"
+    />
+    <app-new-item-button (newExerciseEvent)="addExercise($event)" />
     <br />
     <br />
     <button
-  class="rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
-  (click)="newList()"
->
-  Server Sync
-</button>
-
+      class="rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+      (click)="newList()"
+    >
+      Server Sync
+    </button>
   </main>
 </div>
