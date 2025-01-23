@@ -4,6 +4,7 @@ import { DiaryComponent } from './diary/diary.component';
 import { DiaryRoutingModule } from './diary-routing.module';
 import { EntryItemComponent } from './entry-item/entry-item.component';
 import { ListEntriesComponent } from './list-entries/list-entries.component';
+import { NewItemButtonComponent } from './new-item-button/new-item-button.component';
 
 
 
@@ -11,7 +12,8 @@ import { ListEntriesComponent } from './list-entries/list-entries.component';
   declarations: [
     DiaryComponent,
     EntryItemComponent,
-    ListEntriesComponent
+    ListEntriesComponent,
+    NewItemButtonComponent
   ],
   imports: [
     CommonModule, DiaryRoutingModule
