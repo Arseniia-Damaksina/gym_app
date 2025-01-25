@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { ExerciseSet, ExerciseSetList } from '../interfaces/exercise-set';
+import { ExerciseSetsService } from '../services/exercise-sets.service';
 
 @Component({
   selector: 'app-list-entries',
