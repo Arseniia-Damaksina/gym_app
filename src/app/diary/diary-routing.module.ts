@@ -8,6 +8,7 @@ const routes: Routes = [
   {
     path: '',
     component: DiaryComponent,
+    title: 'Diary'
   },
   {
     path: 'new-template',
@@ -15,7 +16,8 @@ const routes: Routes = [
   },
   {
     path: 'new-reactive',
-    component: NewEntryFormReactiveComponent
+    component: NewEntryFormReactiveComponent,
+    title: 'Entry Form'
   }
 ];
 
