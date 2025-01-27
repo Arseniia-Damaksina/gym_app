@@ -15,9 +15,14 @@ const routes: Routes = [
     component: NewEntryFormTemplateComponent
   },
   {
-    path: 'new-reactive',
+    path: 'entry',
     component: NewEntryFormReactiveComponent,
     title: 'Entry Form'
+  },
+  {
+    path: 'entry/:id',
+    component: NewEntryFormReactiveComponent,
+    title: 'Edit Entry'
   }
 ];
 

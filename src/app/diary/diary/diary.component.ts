@@ -26,19 +26,15 @@ export class DiaryComponent implements OnInit {
 
   addExercise(newSet: ExerciseSet) {
     // this.router.navigate(['/home/new-template']);
-    this.router.navigate(['/home/new-reactive']);
+    this.router.navigate(['/home/diary/entry']);
   }
 
   deleteItem(id: string) {
-    this.exerciseSetsService.deleteItem(id).subscribe(() => {
-      this.exerciseList = this.exerciseList.filter(
-        (exerciseSet) => exerciseSet.id !== id
-      );
-    });
+    this.exerciseSetsService.deleteItem(id).subscribe();
   }
 
-  newRep(updateSet: ExerciseSet) {
+  editEntry(updateSet: ExerciseSet) {
     const id = updateSet.id ?? '';
-    this.exerciseSetsService.updateItem(id, updateSet).subscribe();
+    this.router.navigate([`/home/diary/entry/${id}`]);
   }
 }

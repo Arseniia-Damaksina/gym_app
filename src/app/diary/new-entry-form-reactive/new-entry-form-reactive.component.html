@@ -93,13 +93,13 @@
     </div>
     <div class="flex items-center justify-center">
       <button
-        type="submit"
-        class="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
-        [disabled]="entryForm.invalid"
-        [class.opacity-50]="entryForm.invalid"
-      >
-        Add Entry
-      </button>
+      type="submit"
+      [disabled]="entryForm.invalid"
+      [class.opacity-50]="entryForm.invalid"
+      class="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+    >
+      Confirm
+    </button>
     </div>
   </form>
 </div>
