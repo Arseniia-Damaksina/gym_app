@@ -27,9 +27,9 @@ export class NewEntryFormReactiveComponent implements OnInit {
   ngOnInit(): void {
     // this.entryId = this.route.snapshot.paramMap.get('id');
     if (this.entryId) {
-      this.exerciseSetsService.getItem(this.entryId).subscribe((entry) => {
+      this.route.data.subscribe(({entry}) => {
         this.updateForm(entry);
-      });
+      })
     }
 
     this.entryForm = this.formBuilder.group({
