@@ -11,7 +11,11 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () =>
-      import('./home/home.module').then((file) => file.HomeModule),
+      import('./home/home.module').then((file) => file.HomeModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then((file) => file.LoginModule)
   },
   { path: 'error', component: ErrorPageComponent },
   { path: '**', redirectTo: '/error' },

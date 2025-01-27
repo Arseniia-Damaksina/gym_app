@@ -3,27 +3,34 @@ import { RouterModule, Routes } from '@angular/router';
 import { DiaryComponent } from './diary/diary.component';
 import { NewEntryFormTemplateComponent } from './new-entry-form-template/new-entry-form-template.component';
 import { NewEntryFormReactiveComponent } from './new-entry-form-reactive/new-entry-form-reactive.component';
+import { authGuard } from '../login/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: DiaryComponent,
-    title: 'Diary'
+    children: [
+      {
+        path: '',
+        component: DiaryComponent,
+        title: 'Diary',
+      },
+      {
+        path: 'new-template',
+        component: NewEntryFormTemplateComponent,
+      },
+      {
+        path: 'entry',
+        component: NewEntryFormReactiveComponent,
+        title: 'Entry Form',
+      },
+      {
+        path: 'entry/:id',
+        component: NewEntryFormReactiveComponent,
+        title: 'Edit Entry',
+      },
+    ],
+    canActivateChild: [authGuard],
   },
-  {
-    path: 'new-template',
-    component: NewEntryFormTemplateComponent
-  },
-  {
-    path: 'entry',
-    component: NewEntryFormReactiveComponent,
-    title: 'Entry Form'
-  },
-  {
-    path: 'entry/:id',
-    component: NewEntryFormReactiveComponent,
-    title: 'Edit Entry'
-  }
 ];
 
 @NgModule({
