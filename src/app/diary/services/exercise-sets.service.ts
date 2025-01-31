@@ -10,7 +10,7 @@ export class ExerciseSetsService {
   constructor() {}
 
   private httpClient = inject(HttpClient);
-  private url = 'http://localhost:3000/diary';
+  private url = 'diary';
 
   getInitialList(): Observable<ExerciseSetListAPI> {
     return this.httpClient.get<ExerciseSetListAPI>(this.url);
