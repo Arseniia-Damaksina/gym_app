@@ -12,6 +12,7 @@ import { LoadingOverlayComponent } from './loading-overlay/loading-overlay.compo
 import { LoadInterceptor } from './loading-overlay/load.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { NotificationInterceptor } from './notification/notification.interceptor';
+import { TelemetryInterceptor } from './telemetry/telemetry.interceptor';
 
 @NgModule({
   declarations: [AppComponent, ErrorPageComponent, LoadingOverlayComponent],
@@ -20,7 +21,8 @@ import { NotificationInterceptor } from './notification/notification.interceptor
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HostInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoadInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: NotificationInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: NotificationInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TelemetryInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
 })
