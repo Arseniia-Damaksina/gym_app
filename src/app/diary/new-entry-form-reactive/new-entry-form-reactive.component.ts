@@ -30,12 +30,6 @@ export class NewEntryFormReactiveComponent implements OnInit {
 
   ngOnInit(): void {
     // this.entryId = this.route.snapshot.paramMap.get('id');
-    if (this.entryId) {
-      this.route.data.subscribe(({entry}) => {
-        this.updateForm(entry);
-      })
-    }
-
     this.entryForm = this.formBuilder.group({
       date: [new Date(), Validators.required],
       exercise: ['', Validators.required],
@@ -48,6 +42,13 @@ export class NewEntryFormReactiveComponent implements OnInit {
         [Validators.required, Validators.min(0), multipleValidator(3)],
       ],
     });
+
+    if (this.entryId) {
+      this.route.data.subscribe(({entry}) => {
+        this.updateForm(entry);
+      })
+    }
+
   }
 
   selectExercise(suggestion: string) {
