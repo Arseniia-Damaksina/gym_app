@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { multipleValidator } from './custom-validation';
 import { ExerciseSet } from '../interfaces/exercise-set';
 import { formatDate } from '../../utils/formatDate';
+import { ExercisesService } from '../services/exercises.service';
 
 @Component({
   selector: 'app-new-entry-form-reactive',
@@ -21,6 +22,9 @@ export class NewEntryFormReactiveComponent implements OnInit {
   public entryForm!: FormGroup;
   private formBuilder = inject(NonNullableFormBuilder);
   private exerciseSetsService = inject(ExerciseSetsService);
+  private exerciseService = inject(ExercisesService);
+  public showSuggestions: boolean = false;
+  public exercises$ = this.exerciseService.getExercises();
   private router = inject(Router);
   private route = inject(ActivatedRoute);
 
@@ -44,6 +48,15 @@ export class NewEntryFormReactiveComponent implements OnInit {
         [Validators.required, Validators.min(0), multipleValidator(3)],
       ],
     });
+  }
+
+  selectExercise(suggestion: string) {
+    this.entryForm.get('exercise')?.setValue(suggestion);
+    this.toggleSuggestions(false);
+  }
+
+  toggleSuggestions(turnOn: boolean) {
+    this.showSuggestions = turnOn;
   }
 
   updateForm(entry: ExerciseSet): void {
