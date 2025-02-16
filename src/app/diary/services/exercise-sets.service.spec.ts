@@ -6,7 +6,7 @@ import {
 import { ExerciseSetsService } from './exercise-sets.service';
 import { ExerciseSet, ExerciseSetListAPI } from '../interfaces/exercise-set';
 
-fdescribe('ExerciseSetsService', () => {
+describe('ExerciseSetsService', () => {
   let service: ExerciseSetsService;
   let httpMock: HttpTestingController;
 
