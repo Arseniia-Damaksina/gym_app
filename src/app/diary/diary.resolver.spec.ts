@@ -16,4 +16,3 @@ describe('diaryResolver', () => {
     expect(executeResolver).toBeTruthy();
   });
 });
-// git config --global user.name "Arseniia-Damaksina"
