@@ -10,6 +10,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { multipleValidator } from './custom-validation';
 import { ExerciseSet } from '../interfaces/exercise-set';
 import { formatDate } from '../../utils/formatDate';
+import { ExercisesService } from '../services/exercises.service';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  map,
+  switchMap,
+} from 'rxjs';
+
+const DEBOUNCE_TIME = 300;
 
 @Component({
   selector: 'app-new-entry-form-reactive',
@@ -18,41 +28,49 @@ import { formatDate } from '../../utils/formatDate';
 })
 export class NewEntryFormReactiveComponent implements OnInit {
   @Input('id') entryId?: string;
-  public entryForm!: FormGroup;
   private formBuilder = inject(NonNullableFormBuilder);
   private exerciseSetsService = inject(ExerciseSetsService);
+  private exerciseService = inject(ExercisesService);
+  public showSuggestions: boolean = false;
+  // public exercises$ = this.exerciseService.getExercises();
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+  public entryForm = this.formBuilder.group({
+    date: [new Date(), Validators.required],
+    exercise: ['', Validators.required],
+    sets: [0, [Validators.required, Validators.min(0), multipleValidator(2)]],
+    reps: [0, [Validators.required, Validators.min(0), multipleValidator(3)]],
+  });
+
+  public exercises$ = this.entryForm.valueChanges.pipe(
+    debounceTime(DEBOUNCE_TIME),
+    map((model) => model?.exercise ?? ''),
+    filter((exercise) => exercise.length >= 3),
+    distinctUntilChanged(),
+    switchMap((exercise) => this.exerciseService.getExercises(exercise))
+  );
 
   ngOnInit(): void {
     // this.entryId = this.route.snapshot.paramMap.get('id');
     if (this.entryId) {
-      this.route.data.subscribe(({entry}) => {
+      this.route.data.subscribe(({ entry }) => {
         this.updateForm(entry);
-      })
+      });
     }
+  }
 
-    this.entryForm = this.formBuilder.group({
-      date: [new Date(), Validators.required],
-      exercise: ['', Validators.required],
-      sets: [
-        '',
-        [Validators.required, Validators.min(0), multipleValidator(2)],
-      ],
-      reps: [
-        '',
-        [Validators.required, Validators.min(0), multipleValidator(3)],
-      ],
-    });
+  selectExercise(suggestion: string) {
+    this.entryForm.get('exercise')?.setValue(suggestion);
+    this.toggleSuggestions(false);
+  }
+
+  toggleSuggestions(turnOn: boolean) {
+    this.showSuggestions = turnOn;
   }
 
   updateForm(entry: ExerciseSet): void {
     let { id: _, ...entryForm } = entry;
-    const formattedEntry = {
-      ...entryForm,
-      date: formatDate(entry.date),
-    };
-    this.entryForm.setValue(formattedEntry);
+    this.entryForm.setValue(entryForm);
   }
 
   newEntry() {
