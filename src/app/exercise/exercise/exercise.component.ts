@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './exercise.component.css'
 })
 export class ExerciseComponent {
-
+  elementUrl = 'http://localhost:8080/main.js'
 }
