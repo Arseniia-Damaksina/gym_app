@@ -1,17 +1,15 @@
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ExerciseSetsService } from './exercise-sets.service';
 import { ExerciseSet, ExerciseSetListAPI } from '../interfaces/exercise-set';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('ExerciseSetsService', () => {
   let service: ExerciseSetsService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({ imports: [HttpClientTestingModule] });
+    TestBed.configureTestingModule({ imports: [], providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()] });
     service = TestBed.inject(ExerciseSetsService);
     httpMock = TestBed.inject(HttpTestingController);
   });

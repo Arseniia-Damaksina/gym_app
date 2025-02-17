@@ -13,6 +13,11 @@ const routes: Routes = [
           import('../diary/diary.module').then((file) => file.DiaryModule),
       },
       {
+        path: 'exercise',
+        loadChildren: () =>
+          import('../exercise/exercise.module').then((file) => file.ExerciseModule),
+      },
+      {
         path: '',
         redirectTo: 'diary',
         pathMatch: 'full',
