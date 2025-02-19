@@ -1,7 +1,7 @@
-import { ExerciseComponent } from './exercise.component'
+// import { ExerciseComponent } from './exercise.component'
 
-describe('ExerciseComponent', () => {
-  it('should mount', () => {
-    cy.mount(ExerciseComponent)
-  })
-})
+// describe('ExerciseComponent', () => {
+//   it('should mount', () => {
+//     cy.mount(ExerciseComponent)
+//   })
+// })

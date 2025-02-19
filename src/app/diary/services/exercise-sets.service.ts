@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import {
   ExerciseSet,
   ExerciseSetList,
@@ -15,12 +15,14 @@ export class ExerciseSetsService {
 
   private httpClient = inject(HttpClient);
   private url = 'diary';
+  exerciseList = signal<ExerciseSetList>([] as ExerciseSetList);
 
-  getInitialList(): Observable<ExerciseSetList> {
+  getInitialList() {
     const headers = new HttpHeaders().set('X-TELEMETRY', 'true');
-    return this.httpClient
+    this.httpClient
       .get<ExerciseSetListAPI>(this.url, { headers })
-      .pipe(map((api) => api?.items));
+      .pipe(map((api) => api?.items))
+      .subscribe((list) => this.exerciseList.set(list));
   }
 
   refreshList(): Observable<ExerciseSetList> {
@@ -41,7 +43,9 @@ export class ExerciseSetsService {
     return this.httpClient.get<ExerciseSet>(`${this.url}/${id}`);
   }
 
-  deleteItem(id: string): Observable<boolean> {
-    return this.httpClient.delete<boolean>(`${this.url}/${id}`);
+  deleteItem(id: string) {
+    this.httpClient.delete<boolean>(`${this.url}/${id}`).subscribe(() => {
+      this.exerciseList.update((list) => list.filter((exerciseSet) => exerciseSet.id !== id))
+    });
   }
 }

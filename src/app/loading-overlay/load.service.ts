@@ -1,20 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoadService {
-  #showLoader = false;
+  isLoading = signal<Boolean>(false);
 
   showLoader() {
-    this.#showLoader = true;
+    this.isLoading.set(true);
   }
 
   hideLoader() {
-    this.#showLoader = false;
-  }
-
-  get isLoading() {
-    return this.#showLoader;
+    this.isLoading.set(false);
   }
 }
