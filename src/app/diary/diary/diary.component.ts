@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { ExerciseSet, ExerciseSetList } from '../interfaces/exercise-set';
 import { ExerciseSetsService } from '../services/exercise-sets.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,18 +9,27 @@ import { NewItemButtonComponent } from '../new-item-button/new-item-button.compo
   standalone: true,
   templateUrl: './diary.component.html',
   styleUrl: './diary.component.css',
-  imports: [ListEntriesComponent, NewItemButtonComponent]
+  imports: [ListEntriesComponent, NewItemButtonComponent],
 })
 export class DiaryComponent implements OnInit {
   private exerciseSetsService = inject(ExerciseSetsService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   exerciseList!: ExerciseSetList;
+  volume = computed<number>(() =>
+    this.exerciseSetsService
+      .exerciseList()
+      .reduce(
+        (volume, exerciseSet) => volume + exerciseSet.reps * exerciseSet.sets,
+        0
+      )
+  );
 
   ngOnInit(): void {
-    this.route.data.subscribe(({ exerciseList }) => {
-      this.exerciseList = exerciseList;
-    });
+    // this.route.data.subscribe(({ exerciseList }) => {
+    //   this.exerciseList = exerciseList;
+    // });
+    this.exerciseSetsService.getInitialList();
   }
 
   newList() {
@@ -35,7 +44,7 @@ export class DiaryComponent implements OnInit {
   }
 
   deleteItem(id: string) {
-    this.exerciseSetsService.deleteItem(id).subscribe();
+    this.exerciseSetsService.deleteItem(id);
   }
 
   editEntry(updateSet: ExerciseSet) {

@@ -11,9 +11,12 @@ import { EntryItemComponent } from '../entry-item/entry-item.component';
   imports: [EntryItemComponent]
 })
 export class ListEntriesComponent {
-    @Input() exerciseList!: ExerciseSetList;
+    // @Input() exerciseList!: ExerciseSetList;
     @Output() editEvent = new EventEmitter<ExerciseSet>();
     @Output() deleteEvent = new EventEmitter<string>();
+
+    private exerciseSetsService = inject(ExerciseSetsService);
+    exerciseList = this.exerciseSetsService.exerciseList;
 
     itemTrackBy(index: number, item: ExerciseSet) {
       return item.id;
