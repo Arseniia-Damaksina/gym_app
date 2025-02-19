@@ -23,7 +23,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    bindToComponentInputs: true
+    bindToComponentInputs: true,
+    enableViewTransitions: true
   })],
   exports: [RouterModule],
 })
