@@ -1,10 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ExerciseSet } from '../interfaces/exercise-set';
+import { DatePipe } from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'app-entry-item',
   templateUrl: './entry-item.component.html',
-  styleUrl: './entry-item.component.css'
+  styleUrl: './entry-item.component.css',
+  imports: [DatePipe]
 })
 export class EntryItemComponent {
   @Input('exercise-set') exerciseSet!: ExerciseSet;

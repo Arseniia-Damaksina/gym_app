@@ -5,6 +5,7 @@ import { ExerciseSet } from '../interfaces/exercise-set';
   selector: 'app-new-item-button',
   templateUrl: './new-item-button.component.html',
   styleUrl: './new-item-button.component.css',
+  standalone: true
 })
 export class NewItemButtonComponent {
   @Output() newExerciseEvent = new EventEmitter<ExerciseSet>();

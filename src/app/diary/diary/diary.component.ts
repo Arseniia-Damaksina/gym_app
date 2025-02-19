@@ -2,10 +2,14 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ExerciseSet, ExerciseSetList } from '../interfaces/exercise-set';
 import { ExerciseSetsService } from '../services/exercise-sets.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ListEntriesComponent } from '../list-entries/list-entries.component';
+import { NewItemButtonComponent } from '../new-item-button/new-item-button.component';
 
 @Component({
+  standalone: true,
   templateUrl: './diary.component.html',
   styleUrl: './diary.component.css',
+  imports: [ListEntriesComponent, NewItemButtonComponent]
 })
 export class DiaryComponent implements OnInit {
   private exerciseSetsService = inject(ExerciseSetsService);
