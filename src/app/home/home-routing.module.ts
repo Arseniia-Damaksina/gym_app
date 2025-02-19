@@ -12,11 +12,12 @@ const routes: Routes = [
         loadChildren: () =>
           import('../diary/diary.module').then((file) => file.DiaryModule),
       },
-      {
-        path: 'exercise',
-        loadChildren: () =>
-          import('../exercise/exercise.module').then((file) => file.ExerciseModule),
-      },
+      // Uncomment fo micro frontend
+      // {
+      //   path: 'exercise',
+      //   loadChildren: () =>
+      //     import('../exercise/exercise.module').then((file) => file.ExerciseModule),
+      // },
       {
         path: '',
         redirectTo: 'diary',
